@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TMP-bl-Xt5"/>
+                        <viewControllerLayoutGuide type="bottom" id="5TE-SJ-kPU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fb8-H7-U9x">
+                                <rect key="frame" x="182" y="402" width="236" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Start Subscription">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startSubscription:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1gA-Yw-wzx"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-xe-Y97">
+                                <rect key="frame" x="156" y="245" width="288" height="162"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Recurring billing plan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuC-fG-UCX">
+                                <rect key="frame" x="156" y="205" width="288" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="2rN-QO-bZY"/>
+                                    <constraint firstAttribute="width" constant="288" id="8E4-sc-4gE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.16592244688087854" green="0.48864236455303933" blue="0.81514699835526316" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fa-od-Nil">
+                                <rect key="frame" x="16" y="485" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.085762536446313833" green="0.66031407828282829" blue="0.13002247405839226" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="L3f-Qc-yzr">
+                                <rect key="frame" x="290" y="485" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fb8-H7-U9x" firstAttribute="centerX" secondItem="p1H-xe-Y97" secondAttribute="centerX" id="2Dh-BD-H2Q"/>
+                            <constraint firstItem="1fa-od-Nil" firstAttribute="top" secondItem="fb8-H7-U9x" secondAttribute="bottom" constant="35" id="2bc-zQ-SqA"/>
+                            <constraint firstItem="GuC-fG-UCX" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3Tt-Pp-0yA"/>
+                            <constraint firstItem="1fa-od-Nil" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="FZM-e8-epB"/>
+                            <constraint firstItem="5TE-SJ-kPU" firstAttribute="top" secondItem="1fa-od-Nil" secondAttribute="bottom" constant="85" id="P1T-gK-zoi"/>
+                            <constraint firstItem="L3f-Qc-yzr" firstAttribute="centerX" secondItem="1fa-od-Nil" secondAttribute="centerX" id="RNn-s2-78f"/>
+                            <constraint firstItem="L3f-Qc-yzr" firstAttribute="top" secondItem="1fa-od-Nil" secondAttribute="top" id="S9i-13-LTE"/>
+                            <constraint firstItem="p1H-xe-Y97" firstAttribute="top" secondItem="GuC-fG-UCX" secondAttribute="bottom" constant="8" symbolic="YES" id="USx-c8-YaR"/>
+                            <constraint firstItem="5TE-SJ-kPU" firstAttribute="top" secondItem="fb8-H7-U9x" secondAttribute="bottom" constant="150" id="aou-7A-Nyb"/>
+                            <constraint firstItem="GuC-fG-UCX" firstAttribute="leading" secondItem="p1H-xe-Y97" secondAttribute="leading" id="dpl-Hw-6lX"/>
+                            <constraint firstItem="GuC-fG-UCX" firstAttribute="top" secondItem="TMP-bl-Xt5" secondAttribute="bottom" constant="185" id="eB2-3l-Icw"/>
+                            <constraint firstItem="1fa-od-Nil" firstAttribute="centerX" secondItem="fb8-H7-U9x" secondAttribute="centerX" id="tJQ-qM-Q3S"/>
+                            <constraint firstItem="GuC-fG-UCX" firstAttribute="trailing" secondItem="p1H-xe-Y97" secondAttribute="trailing" id="zhe-y4-tlG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="indicatorWaitingForSubscription" destination="L3f-Qc-yzr" id="9Bj-mL-AYu"/>
+                        <outlet property="pickerViewTypeOfSubscription" destination="p1H-xe-Y97" id="Mhc-XK-j0U"/>
+                        <outlet property="startSubscriptionButton" destination="fb8-H7-U9x" id="Hza-ME-Q7f"/>
+                        <outlet property="subscriptionID" destination="1fa-od-Nil" id="rhM-P2-X0O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="475" y="376"/>
+        </scene>
+    </scenes>
+</document>
