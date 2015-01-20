@@ -34,48 +34,58 @@ braintree.Configuration.configure(
 " initialize a Braintree Client SDK to communicate with Braintree.
 """
 
-def getClientToken(request):
+def get_client_token(request):
 
     clientToken=braintree.ClientToken.generate({})
 
-    response_data = {}
-    response_data['clientToken'] = clientToken
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    responseData = {}
+    responseData['clientToken'] = clientToken
+    return HttpResponse(json.dumps(responseData), content_type="application/json")
 
-def getBillPlans(request):
+def get_bill_plans(request):
     billPlans=braintree.Plan.all()
 
     planIDs   = []
     for simplePlan in billPlans:
         planIDs.append(simplePlan.id)
 
-    response_data = {}
-    response_data['planIDs'] = planIDs
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    responseData = {}
+    responseData['planIDs'] = planIDs
+    return HttpResponse(json.dumps(responseData), content_type="application/json")
 
-def createSubscription(request):
+def create_subscription(request):
+
+    """
+    " Creating the costumer and adding payment_method_nonce
+    """
     result = braintree.Customer.create({
         "first_name": " ",
         "last_name": " ",
-        "payment_method_nonce": request.POST.get("payment_method_nonce"),
     })
 
     if result.is_success:
-        try:
-            customer_id = result.customer.id
-            customer = braintree.Customer.find(customer_id)
-            payment_method_token = customer.credit_cards[0].token
-            result = braintree.Subscription.create({
-                "payment_method_token": payment_method_token,
-                "plan_id": request.POST.get("plan_id"),
-            })
-            if result.is_success:
-                response_data = {}
-                response_data['subscription_id'] = result.subscription.id
-                return HttpResponse(json.dumps(response_data), content_type="application/json")
-            else:
-                return "Error: {0}".format(result.message)
-        except braintree.exceptions.NotFoundError:
-            return "No customer found for id: {0}".format(request.args['id'])
+        customerId = result.customer.id
+
+        """
+        " Creating the subscription
+        """
+        resultPaymentMethod = braintree.PaymentMethod.create({
+            "customer_id": customerId,
+            "payment_method_nonce": request.POST.get("payment_method_nonce"),
+        })
+
+        paymentMethodToken = resultPaymentMethod.payment_method.token
+
+        resultSubscription = braintree.Subscription.create({
+            "payment_method_token": paymentMethodToken,
+            "plan_id": request.POST.get("plan_id"),
+        })
+
+        if resultSubscription.is_success:
+            responseData = {}
+            responseData['subscription_id'] = resultSubscription.subscription.id
+            return HttpResponse(json.dumps(responseData), content_type="application/json")
+        else:
+            return "Error: {0}".format(result.message)
     else:
         return "Error: {0}".format(result.message)

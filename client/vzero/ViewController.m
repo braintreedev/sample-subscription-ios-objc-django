@@ -38,16 +38,16 @@
 - (IBAction)startSubscription:(id)sender {
     Braintree *braintree = [Braintree braintreeWithClientToken:self.clientToken];
     BTDropInViewController *dropInViewController = [braintree dropInViewControllerWithDelegate:self];
-    
+
     dropInViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                              target:self
                                                              action:@selector(userDidCancelPayment)];
-    
+
     //Customize the UI
     dropInViewController.summaryTitle = @"Creating Subscription";
     dropInViewController.summaryDescription = self.selectedPlan;
-    
+
     UINavigationController *navigationController = [[UINavigationController alloc]
                                                     initWithRootViewController:dropInViewController];
     [self presentViewController:navigationController
@@ -97,17 +97,17 @@
 }
 
 -(void) getPlansFromBraintreeMerchantAccount{
-    
+
     [self.manager GET:@"http://127.0.0.1:8000/getBillPlans"
            parameters: nil
               success: ^(AFHTTPRequestOperation *operation, id responseObject) {
                   self.billPlans = responseObject[@"planIDs"];
-                  
+
                   // Connect data
                   self.selectedPlan = self.billPlans[0];
                   self.pickerViewTypeOfSubscription.dataSource = self;
                   self.pickerViewTypeOfSubscription.delegate = self;
-                  
+
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Error: %@", error);
@@ -118,26 +118,27 @@
 
 #pragma mark POST NONCE TO SERVER method
 - (void)postNonceToServer:(NSString *)paymentMethodNonce {
-    
+
+    self.subscriptionID.text = @"";
     [self.indicatorWaitingForSubscription startAnimating];
-    
+
     [self.manager POST:@"http://127.0.0.1:8000/createSubscription"
        parameters:@{@"payment_method_nonce": paymentMethodNonce,
                     @"plan_id": self.selectedPlan,
                     }
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSString *subscriptionIDText = responseObject[@"subscription_id"];
-              
+
               [self.indicatorWaitingForSubscription stopAnimating];
 
               self.subscriptionID.text = [NSString stringWithFormat:@"Subscription ID: %@", subscriptionIDText];
-              
-              
+
+
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
-    
+
 }
 
 @end

@@ -18,7 +18,7 @@ This demo uses
 * [Braintree Python SDK](https://github.com/braintree/braintree_python)
 * [Cocoapods](http://cocoapods.org/): the dependency manager for Objective-C projects.
 
-The sample backend is written in Node.js and uses:
+The sample backend is written in Python and uses:
 
 * [Python](https://www.python.org/): V.2.7.6.
 * [Django](https://www.djangoproject.com/): Python web framework. V. 1.7.1.
