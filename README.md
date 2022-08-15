@@ -1,3 +1,5 @@
+<h2>This repo is on a path to being archived, checkout our other resources in github.com/paypal</h2>
+
 # Using the Braintree API in Objective C & Django to process a subscription payment
 
 This is an example of the Braintree API using the official Objective C & Python SDK's to set up a subscription.
